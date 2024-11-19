@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-output "my_cluster_container_cluster_location" {
+output "this_container_cluster_location" {
   description = "Location of the cluster"
-  value       = resource.google_container_cluster.my_cluster.location
+  value       = resource.google_container_cluster.this.location
 }
 
-output "my_cluster_container_cluster_name" {
+output "this_container_cluster_name" {
   description = "Name of the cluster"
-  value       = resource.google_container_cluster.my_cluster.name
+  value       = resource.google_container_cluster.this.name
 }
