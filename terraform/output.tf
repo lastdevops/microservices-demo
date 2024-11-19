@@ -17,7 +17,7 @@ output "my_cluster_container_cluster_location" {
   value       = resource.google_container_cluster.my_cluster.location
 }
 
-output "cluster_name" {
+output "my_cluster_container_cluster_name" {
   description = "Name of the cluster"
   value       = resource.google_container_cluster.my_cluster.name
 }
