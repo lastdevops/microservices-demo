@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-output "cluster_location" {
+output "my_cluster_container_cluster_location" {
   description = "Location of the cluster"
   value       = resource.google_container_cluster.my_cluster.location
 }
