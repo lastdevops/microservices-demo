@@ -21,7 +21,7 @@ locals {
     "cloudprofiler.googleapis.com"
   ]
   memorystore_apis = ["redis.googleapis.com"]
-  cluster_name     = google_container_cluster.my_cluster.name
+  cluster_name     = google_container_cluster.this.name
 }
 
 # Enable Google Cloud APIs
@@ -37,8 +37,7 @@ module "enable_google_apis" {
 }
 
 # Create GKE cluster
-resource "google_container_cluster" "my_cluster" {
-
+resource "google_container_cluster" "this" {
   name     = var.name
   location = var.region
 
