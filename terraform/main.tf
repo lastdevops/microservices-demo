@@ -39,7 +39,7 @@ module "enable_google_apis" {
 # Create GKE cluster
 resource "google_container_cluster" "my_cluster" {
 
-  name     = var.name
+  name     = "${var.environment}-${var.name}"
   location = var.region
 
   # Enable autopilot for this cluster

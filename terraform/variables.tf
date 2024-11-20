@@ -12,6 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+variable "environment" {
+  type        = string
+  description = "Environment name that will be prefixed to the resource names"
+
+  validation {
+    condition     = lower(var.environment) == var.environment && !strcontains(var.environment, " ") && !strcontains(var.environment, "-")
+    error_message = "Environment name must be lowercase"
+  }
+}
+
 variable "gcp_project_id" {
   type        = string
   description = "The GCP project ID to apply this config to"
