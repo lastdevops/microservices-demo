@@ -34,10 +34,10 @@ resource "null_resource" "kustomization-update" {
 
   provisioner "local-exec" {
     interpreter = ["bash", "-exc"]
-    command     = "sed -i \"s/REDIS_CONNECTION_STRING/${google_redis_instance.cart[0].host}:${google_redis_instance.redis-cart[0].port}/g\" ../kustomize/components/memorystore/kustomization.yaml"
+    command     = "sed -i \"s/REDIS_CONNECTION_STRING/${google_redis_instance.cart[0].host}:${google_redis_instance.cart[0].port}/g\" ../kustomize/components/memorystore/kustomization.yaml"
   }
 
   depends_on = [
-    resource.google_redis_instance.redis-cart
+    resource.google_redis_instance.cart
   ]
 }

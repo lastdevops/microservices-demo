@@ -18,6 +18,6 @@
 # Example: terraform apply -var project_id="${PROJECT_ID}"
 
 variable "project_id" {
-  type        = string
   description = "The Google Cloud project ID."
+  type        = string
 }

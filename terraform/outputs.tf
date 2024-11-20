@@ -14,10 +14,10 @@
 
 output "this_container_cluster_location" {
   description = "Location of the cluster"
-  value       = resource.google_container_cluster.this.location
+  value       = google_container_cluster.this.location
 }
 
 output "this_container_cluster_name" {
   description = "Name of the cluster"
-  value       = resource.google_container_cluster.this.name
+  value       = google_container_cluster.this.name
 }
