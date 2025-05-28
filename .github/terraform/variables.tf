@@ -21,3 +21,20 @@ variable "project_id" {
   type        = string
   description = "The Google Cloud project ID."
 }
+
+variable "env" {
+  type        = string
+  description = "Short Env name"
+}
+
+variable "roles" {
+  type = list(string)
+  description = "Roles for GKE"
+  default = [ 
+    "roles/monitoring.metricWriter",
+    "roles/logging.logWriter",
+    "roles/monitoring.viewer",
+    "roles/stackdriver.resourceMetadata.writer",
+    
+  ]
+}
