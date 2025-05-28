@@ -14,18 +14,11 @@
  * limitations under the License.
  */
 
-# Set defaults for the google Terraform provider.
-provider "google" {
-  project = var.project_id
-  region  = "us-central1"
-  zone    = "us-central1-a"
-}
-
 terraform {
   # Store the state inside a Google Cloud Storage bucket.
   backend "gcs" {
     bucket = "cicd-terraform-state"
-    prefix = "terraform-state"
+    prefix = "terraform-state-${var.env}"
   }
 }
 
@@ -67,30 +60,11 @@ resource "google_service_account" "gke_clusters_service_account" {
 }
 
 # See https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#use_least_privilege_sa
-resource "google_project_iam_member" "gke_clusters_service_account_role_metric_writer" {
+resource "google_project_iam_member" "gke_clusters_service_account_role" {
+  for_each = toset(var.roles)
+  
   project = var.project_id
-  role    = "roles/monitoring.metricWriter"
-  member  = "serviceAccount:${google_service_account.gke_clusters_service_account.email}"
-}
-
-# See https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#use_least_privilege_sa
-resource "google_project_iam_member" "gke_clusters_service_account_role_logging_writer" {
-  project = var.project_id
-  role    = "roles/logging.logWriter"
-  member  = "serviceAccount:${google_service_account.gke_clusters_service_account.email}"
-}
-
-# See https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#use_least_privilege_sa
-resource "google_project_iam_member" "gke_clusters_service_account_role_monitoring_viewer" {
-  project = var.project_id
-  role    = "roles/monitoring.viewer"
-  member  = "serviceAccount:${google_service_account.gke_clusters_service_account.email}"
-}
-
-# See https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#use_least_privilege_sa
-resource "google_project_iam_member" "gke_clusters_service_account_role_stackdriver_writer" {
-  project = var.project_id
-  role    = "roles/stackdriver.resourceMetadata.writer"
+  role    = each.key
   member  = "serviceAccount:${google_service_account.gke_clusters_service_account.email}"
 }
 
